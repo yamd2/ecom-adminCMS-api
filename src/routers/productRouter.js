@@ -100,23 +100,24 @@ router.put(
       const { _id, ...rest } = req.body;
       // set the new image path
       // remove the deleted item
-      const imgToDeletArg = req.body?.imgToDelete?.split(",") || [];
+      const imgToDeletArg = rest?.imgToDelete?.split(",") || [];
 
       // imgToDeletArg.map((item) => fs.unlinkSync(path.join(__dirname, item)));
       //conert string to array
-      req.body.images = req.body?.images.split(",");
+      rest.images = rest?.images?.split(",");
 
       const oldImages =
-        req.body?.images?.filter((item) => !imgToDeletArg?.includes(item)) ||
-        [];
+        rest?.images?.filter((item) => !imgToDeletArg?.includes(item)) || [];
 
       const newImages = req.files;
 
       // image => req.files
       const newImagesPath = newImages.map((item) => item.path);
-      req.body.images = [...oldImages, ...newImagesPath];
+      rest.images = [...oldImages, ...newImagesPath];
 
-      const result = await updateProduct(_id, req.body);
+      console.log(_id, rest);
+
+      const result = await updateProduct(_id, rest);
       //get form data
       //get images
 

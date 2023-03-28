@@ -110,6 +110,7 @@ export const newProductValidation = (req, res, next) => {
     status: SHORTSTR,
     name: SHORTREQUIRED,
     sku: SHORTREQUIRED,
+    parentCat: SHORTREQUIRED,
     qty: NUMREQUIRED,
     price: NUMBER,
     salesPrice: NUMBER,
@@ -123,14 +124,21 @@ export const newProductValidation = (req, res, next) => {
 export const editProductValidation = (req, res, next) => {
   console.log(req.body);
   req.body.salesPrice = req.body.salesPrice || 0;
-  req.body.salesStartDate = req.body.salesStartDate || null;
-  req.body.salesEndDate = req.body.salesEndDate || null;
+  req.body.salesStartDate =
+    !req.body.salesStartDate || req.body.salesStartDate === "null"
+      ? null
+      : req.body.salesStartDate;
+  req.body.salesEndDate =
+    !req.body.salesEndDate || req.body.salesEndDate === "null"
+      ? null
+      : req.body.salesEndDate;
 
   const schema = Joi.object({
     _id: SHORTREQUIRED,
     status: SHORTSTR,
     name: SHORTREQUIRED,
     sku: SHORTREQUIRED,
+    parentCat: SHORTREQUIRED,
     qty: NUMREQUIRED,
     price: NUMBER,
     salesPrice: NUMBER,

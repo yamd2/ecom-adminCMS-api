@@ -11,6 +11,10 @@ export const getAllProducts = () => {
 export const getSingleProduct = (filter) => {
   return ProductSchema.findOne(filter);
 };
+
+export const getSelectedProduct = (filter) => {
+  return ProductSchema.find(filter);
+};
 export const geProductById = (_id) => {
   return ProductSchema.findById(_id);
 };

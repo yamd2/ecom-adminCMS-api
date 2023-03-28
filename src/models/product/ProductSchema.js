@@ -30,14 +30,22 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    parentCat: {
+      type: mongoose.Schema.Types.ObjectId,
+
+      required: true,
+      default: "",
+    },
     salesPrice: {
       type: Number,
     },
     salesStartDate: {
       type: Date,
+      default: null,
     },
     salesEndDate: {
       type: Date,
+      default: null,
     },
 
     description: {
